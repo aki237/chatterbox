@@ -27,3 +27,6 @@ HEADERS  += chatwindow.h \
 
 FORMS    += chatwindow.ui \
     dialog.ui
+
+DISTFILES += \
+    .gitignore
