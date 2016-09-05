@@ -1,3 +1,5 @@
 *.o
 ui*
 chatterbox
+moc*
+Makefile
