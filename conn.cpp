@@ -16,8 +16,8 @@ Conn::Conn(QObject *parent) : QObject(parent){
     //connect(parent, SLOT(printGotData), this )
 }
 
-void Conn::Send(std::string message){
-    socket->write((message+"\n").c_str ());
+int Conn::Send(std::string message) {
+    return socket->write((message+"\n").c_str ());
 }
 
 std::string Conn::Read(){

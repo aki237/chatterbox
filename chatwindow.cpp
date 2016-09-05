@@ -53,13 +53,22 @@ void ChatWindow::printGotData() {
         QLabel *templ = new QLabel(qm);
         QListWidgetItem *tempwi = new QListWidgetItem();
         ui->chatView->addItem (tempwi);
+        ui->chatView->scrollToBottom ();
         ui->chatView->setItemWidget (tempwi, templ);
     }
 }
 
 void ChatWindow::Send () {
     // Check which view we are in and send broadcast or Private based on that....
-    SendRaw("BROADCAST WITH " + Cookie + " " + ui->textBox->text().toStdString ());
+    if (-1 == c->Send("BROADCAST WITH " + Cookie + " " + ui->textBox->text().toStdString ())){
+        QString qm = QString::fromStdString (("<center><b><font color=\"#FF0000\">Lost Connection : Quit the app and restart</font></b></center>"));
+        QLabel *templ = new QLabel(qm);
+        QListWidgetItem *tempwi = new QListWidgetItem();
+        ui->chatView->addItem (tempwi);
+        ui->chatView->scrollToBottom ();
+        ui->chatView->setItemWidget (tempwi, templ);
+        return;
+    }
     ui->textBox->setText ("");
 }
 
@@ -73,7 +82,10 @@ void ChatWindow::Join() {
     std::string password = d->dui->password->text().toStdString ();
     std::cout << "Accepted Join :\nNickname : "<< nickname << std::endl;
     std::cout << "Password : " << password << std::endl;
-    c->Send ("JOIN " + nickname + " " + password);
+    if (c->Send ("JOIN " + nickname + " " + password) == -1){
+        d->dui->error->setText(QString::fromStdString ("<center><b>Chat Server isn't running</b></center>"));
+        d->show ();
+    }
 }
 
 void ChatWindow::Out() {

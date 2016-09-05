@@ -8,7 +8,7 @@ class Conn : public QObject {
 public:
     explicit Conn(QObject *parent=0);
     std::string Read();
-    void Send(std::string);
+    int Send(std::string);
 
 private:
     QTcpSocket *socket;
