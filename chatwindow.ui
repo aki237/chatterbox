@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>Chatterbox</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">font: 13pt &quot;ClearlyU&quot;;</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -73,8 +76,8 @@ color : #FEEDDC;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">font: 75 12pt &quot;Inconsolata&quot;;
-color : #FEEDDC;
+         <string notr="true">color : #FEEDDC;
+font: 14pt &quot;HelveticaNeue [MACR]&quot;;
 padding : 10px;</string>
         </property>
        </widget>
@@ -87,8 +90,8 @@ padding : 10px;</string>
         <item>
          <widget class="QListWidget" name="chatView">
           <property name="styleSheet">
-           <string notr="true">font: 14pt &quot;Inconsolata&quot;;
-color : #FEEDDC;
+           <string notr="true">color : #FEEDDC;
+font: 12pt &quot;HelveticaNeue [MACR]&quot;;
 padding-left : 10px;</string>
           </property>
          </widget>
@@ -96,7 +99,7 @@ padding-left : 10px;</string>
         <item>
          <widget class="QLineEdit" name="textBox">
           <property name="styleSheet">
-           <string notr="true">font: 75 12pt &quot;Inconsolata&quot;;</string>
+           <string notr="true">font: 12pt &quot;HelveticaNeue [MACR]&quot;;</string>
           </property>
           <property name="text">
            <string/>

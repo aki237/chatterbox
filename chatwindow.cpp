@@ -3,7 +3,7 @@
 #include "message.h"
 #include <QMediaPlayer>
 #include <QUrl>
-#include <QPropertyAnimation>
+#include <QFontDatabase>
 #include <iostream>
 
 ChatWindow::ChatWindow(QWidget *parent) :
@@ -11,6 +11,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
     ui(new Ui::ChatWindow) {
 
     joined  = false;
+    QFontDatabase::addApplicationFont("qrc:///res/font.ttf");
     firstUL = true;
     tray = new QSystemTrayIcon();
     d = new JoinDialog(this);
