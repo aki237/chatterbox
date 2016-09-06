@@ -129,8 +129,25 @@ padding-left : 10px;</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>chatters</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>ChatWindow</receiver>
+   <slot>ChangeChat()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>100</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Send()</slot>
+  <slot>ChangeChat()</slot>
  </slots>
 </ui>

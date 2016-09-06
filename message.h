@@ -12,9 +12,11 @@ public:
     std::string GetFrom();
     std::string GetType();
     std::string GetContent();
+    std::string GetChannel();
     Members* GetMembers();
     void Print();
 private:
+    std::string Channel;
     std::string From;
     std::string Type;
     std::string Content;

@@ -97,6 +97,11 @@ std::string base64_decode(std::string const& encoded_string) {
 Message::Message(std::string msg) {
     xml.addData(msg.c_str ());
     if (xml.readNextStartElement () && xml.name() == "MESSAGE") {
+        foreach (const QXmlStreamAttribute &attr, xml.attributes()) {
+            if (attr.name().toString () == QLatin1String("CHANNEL"))  {
+                Channel = attr.value().toString().toStdString();
+            }
+        }
         processMESSAGE();
     }
     if (Type == "userlist") {
@@ -145,8 +150,12 @@ Members* Message::GetMembers() {
     return members;
 }
 
+std::string Message::GetChannel() {
+    return Channel;
+}
+
 void Message::Print() {
-    std::cout << "Message from " << From << " : \"" << Content <<"\" of type " << Type << std::endl;
+    std::cout << "Message in "<< Channel << " channel from " << From << " : \"" << Content <<"\" of type " << Type << std::endl;
 }
 
 Message::~Message() {
