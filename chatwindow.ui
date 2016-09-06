@@ -74,7 +74,8 @@ color : #FEEDDC;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">font: 75 12pt &quot;Inconsolata&quot;;
-color : #FEEDDC;</string>
+color : #FEEDDC;
+padding : 10px;</string>
         </property>
        </widget>
       </item>
@@ -87,7 +88,8 @@ color : #FEEDDC;</string>
          <widget class="QListWidget" name="chatView">
           <property name="styleSheet">
            <string notr="true">font: 14pt &quot;Inconsolata&quot;;
-color : #FEEDDC;</string>
+color : #FEEDDC;
+padding-left : 10px;</string>
           </property>
          </widget>
         </item>

@@ -1,6 +1,8 @@
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
 #include "message.h"
+#include <QMediaPlayer>
+#include <QUrl>
 #include <iostream>
 
 ChatWindow::ChatWindow(QWidget *parent) :
@@ -13,12 +15,16 @@ ChatWindow::ChatWindow(QWidget *parent) :
     d->show ();
     ui->setupUi(this);
     c = new Conn(this);
+    alert = new QMediaPlayer;
+    alert->setMedia (QUrl("qrc:///res/alert.mp3"));
+    alert->setVolume (100);
     SendRaw ("LIST USERS");
 }
 
 void ChatWindow::printGotData() {
     Message m(c->Read());
     m.Print();
+    alert->stop ();
     if (m.GetType ()== "cookie"){
         if (!joined) {
             Cookie = m.GetContent ();
@@ -45,21 +51,39 @@ void ChatWindow::printGotData() {
             d->dui->error->setText(QString::fromStdString ("<center><b>" + m.GetContent () + "</b></center>"));
             d->show ();
             c->Send ("LIST USERS");
+            return;
         }
         // tray->showMessage ("chttrBx - Error",m.GetContent (),QSystemTrayIcon::Critical,10000);
-    }
-    if (m.GetType () == "message") {
-        QString qm = QString::fromStdString ((m.GetFrom () + " says " + m.GetContent ()));
+        QString qm = QString::fromStdString ("<center><b><font color=\"#FF0000\">"
+                                             + m.GetFrom () + " throws " + m.GetContent ()+
+                                             "</font></b></center>");
         QLabel *templ = new QLabel(qm);
         QListWidgetItem *tempwi = new QListWidgetItem();
         ui->chatView->addItem (tempwi);
         ui->chatView->scrollToBottom ();
         ui->chatView->setItemWidget (tempwi, templ);
+        if (m.GetFrom () != Nickname) {
+            alert->play ();
+        }
+    }
+    if (m.GetType () == "message") {
+        QString qm = QString::fromStdString (("<b>" + m.GetFrom () + "</b>"+ " says " + m.GetContent ()));
+        QLabel *templ = new QLabel(qm);
+        QListWidgetItem *tempwi = new QListWidgetItem();
+        ui->chatView->addItem (tempwi);
+        ui->chatView->scrollToBottom ();
+        ui->chatView->setItemWidget (tempwi, templ);
+        if (m.GetFrom () != Nickname) {
+            alert->play ();
+        }
     }
 }
 
 void ChatWindow::Send () {
     // Check which view we are in and send broadcast or Private based on that....
+    if (ui->textBox->text().trimmed ().toStdString () == "") {
+        return;
+    }
     if (-1 == c->Send("BROADCAST WITH " + Cookie + " " + ui->textBox->text().toStdString ())){
         QString qm = QString::fromStdString (("<center><b><font color=\"#FF0000\">Lost Connection : Quit the app and restart</font></b></center>"));
         QLabel *templ = new QLabel(qm);
@@ -80,6 +104,7 @@ void ChatWindow::SendRaw (std::string msg) {
 void ChatWindow::Join() {
     std::string nickname = d->dui->nickname->text().toStdString ();
     std::string password = d->dui->password->text().toStdString ();
+    Nickname = nickname;
     std::cout << "Accepted Join :\nNickname : "<< nickname << std::endl;
     std::cout << "Password : " << password << std::endl;
     if (c->Send ("JOIN " + nickname + " " + password) == -1){

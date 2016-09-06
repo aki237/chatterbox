@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <conn.h>
 #include <QSystemTrayIcon>
+#include <QMediaPlayer>
 #include "joindialog.h"
 namespace Ui {
 class ChatWindow;
@@ -24,12 +25,14 @@ public slots :
     void printGotData();
 private:
     Conn *c;
+    QMediaPlayer* alert;
     std::string Cookie,Nickname;
     Ui::ChatWindow *ui;
     QSystemTrayIcon *tray;
     JoinDialog *d;
     bool joined;
     void SendRaw(std::string);
+
 };
 
 #endif // CHATWINDOW_H
