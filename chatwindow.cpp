@@ -179,6 +179,7 @@ void ChatWindow::ChangeChat() {
         ui->chatView->scrollToBottom ();
         ui->chatView->setItemWidget (tempwi, templ);
     }
+    ui->textBox->setFocus ();
 }
 
 void ChatWindow::SendRaw (std::string msg) {
@@ -192,6 +193,8 @@ void ChatWindow::Join() {
     if (c->Send ("JOIN " + nickname + " " + password) == -1){
         d->dui->error->setText(QString::fromStdString ("<center><b>Chat Server isn't running</b></center>"));
         d->show ();
+    } else {
+      this->show();
     }
 }
 
