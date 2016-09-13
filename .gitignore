@@ -3,3 +3,4 @@ ui*
 chatterbox
 moc*
 Makefile
+*.user
