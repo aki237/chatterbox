@@ -2,9 +2,9 @@
 #include "message.h"
 #include <iostream>
 
-Conn::Conn(QObject *parent) : QObject(parent){
+Conn::Conn(std::string serverAddress, QObject *parent) : QObject(parent){
   socket = new QTcpSocket(this);
-  socket->connectToHost("10.9.10.9", 6672);
+  socket->connectToHost(QString::fromStdString (serverAddress), 6672);
 
   if(socket->waitForConnected(3000)){
     qDebug() << "Connected to chatPi Server!!";

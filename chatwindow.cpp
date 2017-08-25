@@ -17,11 +17,9 @@ ChatWindow::ChatWindow(QWidget *parent) :
     d = new JoinDialog(this);
     d->show ();
     ui->setupUi(this);
-    c = new Conn(this);
     alert = new QMediaPlayer;
     alert->setMedia (QUrl("qrc:///res/alert.mp3"));
     alert->setVolume (100);
-    SendRaw ("LIST USERS");
 }
 
 void ChatWindow::printGotData() {
@@ -187,8 +185,10 @@ void ChatWindow::SendRaw (std::string msg) {
 }
 
 void ChatWindow::Join() {
+    std::string serverAddress = d->dui->server->text().toStdString ();
     std::string nickname = d->dui->nickname->text().toStdString ();
     std::string password = d->dui->password->text().toStdString ();
+    c = new Conn(serverAddress, this);
     Nickname = nickname;
     if (c->Send ("JOIN " + nickname + " " + password) == -1){
         d->dui->error->setText(QString::fromStdString ("<center><b>Chat Server isn't running</b></center>"));
@@ -196,6 +196,7 @@ void ChatWindow::Join() {
     } else {
       this->show();
     }
+    SendRaw ("LIST USERS");
 }
 
 void ChatWindow::Out() {

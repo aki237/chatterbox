@@ -20,7 +20,7 @@
    <string>Chatterbox</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">font: 13pt &quot;ClearlyU&quot;;</string>
+   <string notr="true">font: 13pt &quot;monospace&quot;;</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
@@ -34,7 +34,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-color : rgb(39, 40, 34);
-font: 9pt &quot;Roboto Slab&quot;;
+font: 9pt &quot;monospace&quot;;
 color : #FEEDDC;</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -77,7 +77,7 @@ color : #FEEDDC;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color : #FEEDDC;
-font: 14pt &quot;HelveticaNeue [MACR]&quot;;
+font: 14pt &quot;monospace&quot;;
 padding : 10px;</string>
         </property>
        </widget>
@@ -91,7 +91,7 @@ padding : 10px;</string>
          <widget class="QListWidget" name="chatView">
           <property name="styleSheet">
            <string notr="true">color : #FEEDDC;
-font: 12pt &quot;HelveticaNeue [MACR]&quot;;
+font: 12pt &quot;monospace&quot;;
 padding-left : 10px;</string>
           </property>
          </widget>
@@ -99,7 +99,7 @@ padding-left : 10px;</string>
         <item>
          <widget class="QLineEdit" name="textBox">
           <property name="styleSheet">
-           <string notr="true">font: 12pt &quot;HelveticaNeue [MACR]&quot;;</string>
+           <string notr="true">font: 12pt &quot;monospace&quot;;</string>
           </property>
           <property name="text">
            <string/>

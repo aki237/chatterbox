@@ -6,7 +6,7 @@
 class Conn : public QObject {
     Q_OBJECT
 public:
-    explicit Conn(QObject *parent=0);
+    explicit Conn(std::string, QObject *parent=0);
     std::string Read();
     int Send(std::string);
 
